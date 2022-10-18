@@ -1,2 +1,2 @@
 # makeWeatherDOC
-<p>一个简单的pyqt练手项目</p>
+<p>天气预报广播稿生成工具</p>
