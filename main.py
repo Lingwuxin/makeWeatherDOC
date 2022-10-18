@@ -14,10 +14,10 @@ class AppConfig():
     def __init__(self):
         self.savePath = r'D:\天气预报'
 
+
 class MainApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
-        super(QtWidgets.QMainWindow,self).__init__()
-
+        super(QtWidgets.QMainWindow, self).__init__()
 
         # app_window = QtWidgets.QMainWindow()
         self.setupUi(self)
@@ -47,14 +47,10 @@ class MainApp(QtWidgets.QMainWindow, Ui_MainWindow):
             self.config = pickle.load(config_file)
 
     def startThread(self):  # 启动多线程
-        def doThread(_):
-            self.get_data()
-            self.get_weather()
-            self.getPBarState()
-            self.getPBarStateDid()
-        self.thread = RunthreadStart()  # 利用一个子线程去激活其他子线程
-        self.thread.isStart.connect(doThread)
-        self.thread.start()
+        self.get_data()
+        self.get_weather()
+        self.getPBarState()
+        self.getPBarStateDid()
 
     def get_weather(self):  # 获取天气信息
         def setWeatherMsg(wea: Weathers):  # 将天气信息设置到窗口
@@ -160,15 +156,6 @@ class MainApp(QtWidgets.QMainWindow, Ui_MainWindow):
 
 
 # 子线程
-
-class RunthreadStart(QtCore.QThread):
-    isStart = QtCore.pyqtSignal(int)
-
-    def __init__(self):
-        super(RunthreadStart, self).__init__()
-
-    def run(self):
-        self.isStart.emit(1)
 
 
 class RunthreadGetWeather(QtCore.QThread):
