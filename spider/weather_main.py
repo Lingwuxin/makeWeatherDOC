@@ -11,7 +11,7 @@ import datetime
 from zhdate import ZhDate as lunar_date
 import spider.getCity_Weather as getCity_Weather
 import spider.Nanyang as Nanyang
-import os,subprocess  
+import os,subprocess
 
 
 class Weathers():
@@ -21,7 +21,7 @@ class Weathers():
         self.clothes = str()  # 穿衣指数
 
         self.doc_name = '某年某月某日晚间气象预报'
-        self.doc_path = 'C:/晚间气象预报'
+        self.doc_path = r'C:\Users\Public\Desktop\晚间气象预报'
 
         self.wea = '未知'
         self.temLow = '未知'
@@ -42,7 +42,7 @@ class Weathers():
         if not len(self.remind):
             self.remind = '________________________________________________________________________'
         if not len(self.doc_path):
-            self.doc_path = 'C:/晚间气象预报'
+            self.doc_path = r'C:\Users\Public\Desktop\晚间气象预报'
 
     def getweather(self):
         self.airs = Nanyang.get_airs()

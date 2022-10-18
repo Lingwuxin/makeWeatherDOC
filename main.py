@@ -12,7 +12,7 @@ sig = Signal()
 
 class AppConfig():
     def __init__(self):
-        self.savePath = 'C:/'
+        self.savePath = r'D:\天气预报'
 
 class MainApp(QtWidgets.QMainWindow, Ui_MainWindow):
     def __init__(self):
