@@ -24,7 +24,7 @@ class MainApp(QtWidgets.QMainWindow, Ui_MainWindow):
         self.setWindowTitle('生成天气预报')
         icon = QtGui.QIcon()
         ico_path = ico_path = os.path.join(
-            os.path.dirname(__file__), 'UI/logo.png')
+            os.path.dirname(__file__), 'logo.png')
         icon.addPixmap(QtGui.QPixmap(ico_path),
                        QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.setWindowIcon(icon)

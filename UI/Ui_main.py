@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'f:\python_tring\spider\weatherSpide RE by pyqt\UI\main.ui'
+# Form implementation generated from reading ui file 'f:\python_tring\broadcasting station\broadcastingStationToolsBox\makeWeatherDOC\UI\main.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.4
 #
@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_MainWindow(object):
-    def setupUi(self, MainWindow:QtWidgets.QMainWindow):
+    def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(531, 674)
         self.centralwidget_main = QtWidgets.QWidget(MainWindow)
