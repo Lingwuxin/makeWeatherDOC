@@ -84,7 +84,7 @@ class Weathers():
         self.temHigh = weatherData.temHigh
         self.temLow = weatherData.temLow
         self.weatherList = weatherData.citys_weather()
-        # self.get_ray()
+        self.get_ray()
 
     def getData(self):
         # 设置日期信息
