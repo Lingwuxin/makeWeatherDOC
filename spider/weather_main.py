@@ -11,7 +11,9 @@ import datetime
 from zhdate import ZhDate as lunar_date
 import spider.getCity_Weather as getCity_Weather
 import spider.Nanyang as Nanyang
-import os,subprocess
+import os
+from bs4 import BeautifulSoup
+import requests
 
 
 class Weathers():
@@ -26,13 +28,40 @@ class Weathers():
         self.wea = '未知'
         self.temLow = '未知'
         self.temHigh = '未知'
-
+        self.rays = "未知"
+        self.airs="未知"
         # 获取天气
         # self.getweather()
         # 获取南阳市的紫外线强度和空气质量
         # self.rays = Nanyang.get_rays()
         # self.airs = Nanyang.get_airs()
         # self.get_docx()
+
+    def get_ray(self):
+        headers = {
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+            'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,ja;q=0.5',
+            'Cache-Control': 'max-age=0',
+            'Connection': 'keep-alive',
+            # 'Cookie': 'userNewsPort0=1; Hm_lvt_080dabacb001ad3dc8b9b9049b36d43b=1725811063; HMACCOUNT=C2748E83AC9D0A22; f_city=%E9%83%91%E5%B7%9E%7C101180101%7C; Hm_lpvt_080dabacb001ad3dc8b9b9049b36d43b=1725812763',
+            'Sec-Fetch-Dest': 'document',
+            'Sec-Fetch-Mode': 'navigate',
+            'Sec-Fetch-Site': 'none',
+            'Sec-Fetch-User': '?1',
+            'Upgrade-Insecure-Requests': '1',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36 Edg/128.0.0.0',
+            'sec-ch-ua': '"Chromium";v="128", "Not;A=Brand";v="24", "Microsoft Edge";v="128"',
+            'sec-ch-ua-mobile': '?0',
+            'sec-ch-ua-platform': '"Windows"',
+        }
+        res = requests.get(
+            'https://tianqi.2345.com/nanyang2d/57178.htm', headers=headers, timeout=20)
+        res.encoding = 'utf-8'
+        # print(res.status_code)
+        soup = BeautifulSoup(res.text, 'html.parser')
+        rays_spuer = soup.find_all('span', class_='real-data-mess fl')
+        rays: str = rays_spuer[2].text
+        self.rays=rays.split()[-1]
 
     def set_text(self):  # 冗余控制，避免出现误操作
         # 意义不大
@@ -46,7 +75,7 @@ class Weathers():
 
     def getweather(self):
         self.airs = Nanyang.get_airs()
-        self.rays = Nanyang.get_rays()
+        self.rays = Nanyang.get_rays()#由于未知原因，该函数必须执行且一旦正确返回结果，故返回空结果占位，就会导致程序报错
         href = "http://www.weather.com.cn/weather/101180701.shtml"
         weatherData = getCity_Weather.Weather(url=href)
         weatherData.url = href
@@ -55,6 +84,7 @@ class Weathers():
         self.temHigh = weatherData.temHigh
         self.temLow = weatherData.temLow
         self.weatherList = weatherData.citys_weather()
+        # self.get_ray()
 
     def getData(self):
         # 设置日期信息
@@ -109,4 +139,3 @@ class Weathers():
 
         doc.save(f'{self.doc_path}/{self.doc_name}')
         os.startfile(f'{self.doc_path}/{self.doc_name}')
-

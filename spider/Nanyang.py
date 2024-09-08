@@ -19,5 +19,5 @@ def get_rays():
         #print(res.status_code)
         soup = BeautifulSoup(res.text,'html.parser')
         rays_spuer=soup.find_all('li',class_='li1 hot')
-        rays=rays_spuer[0].span.string
+        rays="test"
         return rays

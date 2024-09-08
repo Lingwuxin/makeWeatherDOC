@@ -6,12 +6,11 @@ import requests
 
 class Weather():
 
-    def __init__(self, url='', wea='', temHigh='', temLow='', rays=''):
+    def __init__(self, url='', wea='', temHigh='', temLow=''):
         self.wea = wea
         self.temHigh = temHigh
         self.temLow = temLow
         self.url = url
-        self.rays = rays
 
     def getWeather(self):
         headers = {
